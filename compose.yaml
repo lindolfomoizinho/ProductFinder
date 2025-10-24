@@ -1,4 +1,4 @@
-services:
+﻿services:
   # --- Serviço da Aplicação ---
   app:
     build:
