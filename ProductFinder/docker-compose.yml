@@ -1,0 +1,44 @@
+services:
+  # --- Serviço da Aplicação ---
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: product-finder-app
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    networks:
+      - product-finder-rede
+    depends_on:
+      - mongodb
+    environment:
+      - MongoDBSettings__ConnectionString=mongodb://root:root@mongodb:27017
+      - MongoDBSettings__DatabaseName=ProductFinderDB
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  # --- Serviço do MongoDB ---
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - product-finder-rede
+
+# --- Definições de Volume e Rede ---
+volumes:
+  # Volume para persistir os dados do Mongo
+  mongo-data:
+    driver: local
+
+networks:
+  # Rede interna para os contêineres se comunicarem
+  product-finder-rede:
+    driver: bridge

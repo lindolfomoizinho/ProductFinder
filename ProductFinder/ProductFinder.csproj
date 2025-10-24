@@ -16,9 +16,12 @@
     <ItemGroup>
       <Folder Include="Controller\" />
       <Folder Include="Model\Domain\Dtos\" />
-      <Folder Include="Model\Repository\" />
       <Folder Include="Model\Service\" />
       <Folder Include="View\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MongoFramework" Version="0.29.0" />
     </ItemGroup>
 
 </Project>
