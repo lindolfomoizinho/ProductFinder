@@ -3,7 +3,7 @@
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ProductFinder/Dockerfile
     container_name: product-finder-app
     ports:
       - "8080:8080"
